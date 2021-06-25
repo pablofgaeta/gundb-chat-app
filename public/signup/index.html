@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lambda-Talk</title>
+    <meta name="description" content="Test GUN project">
+    <meta name="author" content="Pablo Gaeta">
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="./signup.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <a class='navbar-brand font-weight-bold'>&lambda;ambda Talk</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Sign Up <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div id='form-container' class="text-center">
+      <form class="form-signup">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+        <label for="input-uname" class="sr-only">Username</label>
+        <div class="input-group has-validation mb-3">
+          <input type="text" id='input-uname' class="form-control" placeholder="Username" required autofocus>
+          <div id="input-uname-feedback" class="invalid-feedback">
+            Invalid Username
+          </div>
+        </div>
+        <label for="input-pass" class="sr-only">Password</label>
+        <input type="password" id="input-pass" class="form-control mb-3" placeholder="Password" required>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Sign up</button>
+        <div id='signup-validation' class="alert alert-info" style="display: none;" role="alert">
+          Successful User Signup!
+        </div>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script> 
+    <script>
+      const gun = Gun();
+      const form = document.querySelector('form');
+
+      async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          mode: 'same-origin', // no-cors, *cors, same-origin
+          cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'same-origin', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          referrerPolicy: 'no-referrer', 
+          body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+      }
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault()
+        const uname = document.querySelector('#input-uname');
+        const pass = document.querySelector('#input-pass');
+        const uname_valid = document.querySelector('#signup-validation');
+
+        const body = {uname : uname.value, pass : pass.value};
+        const ack = await postData('/signup', body);
+        
+        if (ack.err) {
+          document.querySelector('#input-uname-feedback').innerHTML = ack.err;
+          uname.classList.add('is-invalid');
+          uname_valid.style.display = 'none';
+        }
+        else {
+          console.log("Created user");
+          console.log(JSON.stringify({alias : body.uname, pub : ack.pub}, null, 4))
+          uname.innerHTML = '';
+          uname_valid.innerHTML = 'Created user: ' + body.uname;
+          uname_valid.style.display = 'block';
+        }
+      });
+    </script>
+  </body>
+</html>

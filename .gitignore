@@ -1,3 +1,6 @@
+# local gundb data
+data/
+
 # Logs
 logs
 *.log

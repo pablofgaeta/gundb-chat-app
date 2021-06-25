@@ -1,0 +1,17 @@
+{
+  "name": "gundb-chat-app",
+  "version": "1.0.0",
+  "description": "Test example of GUN API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Pablo Gaeta",
+  "license": "ISC",
+  "dependencies": {
+    "axe": "^8.0.0",
+    "bootstrap": "^5.0.2",
+    "gun": "^0.2020.1232"
+  }
+}

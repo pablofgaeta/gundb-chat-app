@@ -1,0 +1,49 @@
+html,body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color : darkslateblue;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#viewport-container {
+    height : 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#main-container {
+    flex-grow: 1;
+}
+
+.center-container {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+}
+
+.title-container {
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.login-container {
+    background-color: aquamarine;
+    width: 75vw;
+    height: 75vh;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10;
+    border-radius: 10;
+}
+
+.login-container *, .login-container * {
+    display: block;
+}
+
+.uname-container, .pass-container {
+    width: 80%;
+    padding-bottom: 15px;
+}

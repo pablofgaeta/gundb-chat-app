@@ -8,6 +8,14 @@ body {
     font-family: 'Roboto Mono', monospace;
 }
 
+.bg-slate-blue {
+    background-color : darkslateblue;
+}
+
+.slate-blue {
+    color : darkslateblue;
+}
+
 #viewport-container {
     height : 100vh;
     display: flex;
@@ -16,12 +24,36 @@ body {
 
 #main-container {
     flex-grow: 1;
+    display: flex;
+}
+
+#convos {
+    min-width: 200px;
+    width: 33%;
+    border-right: 5px solid white;
+}
+
+#convos, #messages {
+    display: flex;
+    height: 100%;
+}
+
+.main-title {
+    height: fit-content;
+    width: 100%;
+    padding: 10px;
+    background-color: darkslategrey;
+    border-bottom: 5px solid white;
+}
+
+#messages {
+    flex-grow: 1;
 }
 
 .center-container {
-    display: grid;
-    justify-items: center;
-    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .title-container {
@@ -35,8 +67,8 @@ body {
     width: 75vw;
     height: 75vh;
     -webkit-border-radius: 10px;
-    -moz-border-radius: 10;
-    border-radius: 10;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 .login-container *, .login-container * {

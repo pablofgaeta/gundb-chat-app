@@ -7,6 +7,12 @@
     <meta name="description" content="Test GUN project">
     <meta name="author" content="Pablo Gaeta">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@900&display=swap" rel="stylesheet">
+
     <!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -20,10 +26,10 @@
     <script src="./libs/gun.js"></script> 
   </head>
 
-  <body class='bg-slate-blue'>
+  <body class='bg-light'>
     <div id='viewport-container'>
         <nav class="navbar navbar-expand-sm navbar-light bg-light" role='navigation'>
-            <a class='navbar-brand font-weight-bold text-dark'>&lambda;ambda Talk</a>
+            <a class='navbar-brand txt-xxl'>&lambda;ambda Talk</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -41,14 +47,34 @@
               </ul>
             </div>
           </nav>
-          <div id='main-container' class='text-light bg-slate-blue'>
-            <div id='convos'>
+          <div id='main-container' class='text-light bg-light'>
+            <div id='convos-container'>
               <div class='main-title center-container'>Conversations</div>
             </div>
-            <div id='messages'>
-              <div  class='main-title  center-container'>Messages</div>
+            <div id='messages-container'>
+              <div class='main-title  center-container'>Messages</div>
+              <div id='messages-content'>
+                <div id='messages-body'></div>
+                <form  action="" id='msg-keyboard-form'>
+                  <!-- <button id='keyboard-types'>emoji</button> -->
+                  <span id='messages-keyboard' role="textbox"  contenteditable></span>
+                  <input id='messages-send' type='submit' value='send'></input>
+                </form>
+              </div>
             </div>
           </div>
     </div>
+
+    <script>
+      const get = (x) => document.querySelector(x);
+      const getAll = (x) => document.querySelectorAll(x);
+
+      get('#messages-send').addEventListener('submit', function(event) {
+        event.preventDefault();
+        console.log(get('#messages-keyboard').value);    
+        return false;    
+      });
+      console.log(get('#messages-send'));
+    </script>
   </body>
 </html>
